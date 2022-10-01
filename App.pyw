@@ -147,56 +147,64 @@ class MyApp:
 			conn.commit()
 			self.borrado_campos()
 			okcheck()
+		except NameError:
+				error_conn()
 		except:
 			mensaje_error()
 
 	def read(self):
-		id = self.id.get()
-		cursor.execute(f'SELECT * FROM DATOS_USUARIOS WHERE ID={id}')
-		persona = cursor.fetchone()
-		if persona == None:
-			messagebox.showwarning("Error", "El id ingresado no le pertenece a ningún usuario en la base de datos.")
-		else:
-			self.nombre.set(persona[1])
-			password = self.desencriptar(str(persona[2]))
-			self.password.set(password)
-			self.apellido.set(persona[3])
-			self.direccion.set(persona[4])
-			self.text_box.delete('1.0',"end")
-			self.text_box.insert('1.0', persona[5])
+		try:
+			id = self.id.get()
+			cursor.execute(f'SELECT * FROM DATOS_USUARIOS WHERE ID={id}')
+			persona = cursor.fetchone()
+			if persona == None:
+				messagebox.showwarning("Error", "El id ingresado no le pertenece a ningún usuario en la base de datos.")
+			else:
+				self.nombre.set(persona[1])
+				password = self.desencriptar(str(persona[2]))
+				self.password.set(password)
+				self.apellido.set(persona[3])
+				self.direccion.set(persona[4])
+				self.text_box.delete('1.0',"end")
+				self.text_box.insert('1.0', persona[5])
+		except NameError:
+			error_conn()
 
 	def update(self):
-		id = self.id.get()
-		cursor.execute(f'SELECT * FROM DATOS_USUARIOS WHERE ID={id}')
-		persona = cursor.fetchone()
-		if persona == None:
-			messagebox.showwarning("Error", "El id ingresado no le pertenece a ningún usuario en la base de datos.")
-		else:
-			password = self.encriptar()
-			cursor.execute(f'UPDATE DATOS_USUARIOS SET NOMBRE_USUARIO="{self.nombre.get()}", PASSWORD="{password}", APELLIDO="{self.apellido.get()}",DIRECCION="{self.direccion.get()}",COMENTARIOS={self.text_box.get(1.0, "end-1c")} WHERE ID={self.id.get()}')
-			conn.commit()
-			self.borrado_campos()
-			okcheck()
+		try:
+			id = self.id.get()
+			cursor.execute(f'SELECT * FROM DATOS_USUARIOS WHERE ID={id}')
+			persona = cursor.fetchone()
+			if persona == None:
+				messagebox.showwarning("Error", "El id ingresado no le pertenece a ningún usuario en la base de datos.")
+			else:
+				password = self.encriptar()
+				cursor.execute(f'UPDATE DATOS_USUARIOS SET NOMBRE_USUARIO="{self.nombre.get()}", PASSWORD="{password}", APELLIDO="{self.apellido.get()}",DIRECCION="{self.direccion.get()}",COMENTARIOS={self.text_box.get(1.0, "end-1c")} WHERE ID={self.id.get()}')
+				conn.commit()
+				self.borrado_campos()
+				okcheck()
+		except NameError:
+			error_conn()
 
 
 	def delete(self):
-		id = self.id.get()
-		cursor.execute(f'SELECT * FROM DATOS_USUARIOS WHERE ID={id}')
-		persona = cursor.fetchone()
-		if persona == None:
-			messagebox.showwarning("Error", "El id ingresado no le pertenece a ningún usuario en la base de datos.")
-		else:
-			try:
-				valor=messagebox.askquestion("Eliminar", f"¿Está seguro de que desea eliminar a {self.nombre.get()}?")
+		try:
+			id = self.id.get()
+			cursor.execute(f'SELECT * FROM DATOS_USUARIOS WHERE ID={id}')
+			persona = cursor.fetchone()
+			if persona == None:
+				messagebox.showwarning("Error", "El id ingresado no le pertenece a ningún usuario en la base de datos.")
+			else:
+				valor=messagebox.askquestion("Eliminar", f"¿Está seguro de que desea eliminar a {persona[1]}?")
 				if valor=="yes":
-					cursor.execute(f'DELETE FROM DATOS_USUARIOS WHERE ID={self.id.get()}')
+					cursor.execute(f'DELETE FROM DATOS_USUARIOS WHERE ID={id}')
 					conn.commit()
 					self.borrado_campos()
 					okcheck()
-				else:
-					pass
-			except:
-				mensaje_error()
+		except NameError:
+			error_conn()
+		except:
+			mensaje_error()
 
 def darkstyle(root):
    
@@ -216,8 +224,11 @@ def okcheck():
 def avisoLicencia():
 	messagebox.showwarning("Licencia", "Producto bajo licencia GNU")
 
+def error_conn():
+	messagebox.showwarning("Error", "No puedes realizar una operación sin antes conectarte a la base de datos")
+
 def mensaje_error():
-	valor=messagebox.showwarning("Error", "El usuario no fue cargado por algún dato inválido, por favor corrijalo inténtelo nuevamente")
+	messagebox.showwarning("Error", "El usuario no fue cargado por algún dato inválido, por favor corrijalo inténtelo nuevamente")
 
 def salirAplicacion():
 	valor=messagebox.askquestion("Salir", "¿Desea salir de la aplicación?")
@@ -244,4 +255,4 @@ def main():
 	root.mainloop()
 
 if __name__ =='__main__':
-    main()
+	main()
