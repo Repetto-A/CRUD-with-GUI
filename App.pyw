@@ -7,9 +7,14 @@ import cryptocode
 
 
 class MyApp:
+
+	
+	# Change this vars before start
+	#-----------------------------------------------------------------
 	database = 'Database.db'
-	key = 'Alejandro'
-    
+	key = 'Example key'
+    #-----------------------------------------------------------------
+
 	def __init__(self, parent):
 		
 		self.myParent = parent
@@ -20,7 +25,7 @@ class MyApp:
 		self.top_frame.pack(side="top", fill="x", expand=False)
 		self.bottom_frame.pack(side="bottom", pady=20)
 		
-		self.titulo = ttk.Label(self.top_frame, text="Sistema de gestión de BBDD", font=("arial",20)).pack(padx=10, pady=20)
+		self.title = ttk.Label(self.top_frame, text="BBDD manager", font=("arial",20)).pack(padx=10, pady=20)
 		self.top_left = Frame(self.top_frame)
 		self.top_right = Frame(self.top_frame)
 		self.top_left.pack(side="left", fill="x", expand=True)
@@ -31,183 +36,181 @@ class MyApp:
 		self.bottom_left.pack(side="left", fill="both")
 		self.bottom_right.pack(side="right", fill="x")
 		
-		# Campos
+		# Fields
 
 		self.id = IntVar()
-		self.frameid = Frame(self.top_frame)
-		self.frameid.pack(side="top", fill="x")
-		self.label_id = ttk.Label(self.frameid, text="ID:", font=("arial",10)).pack(padx=10, pady=10, side='left', anchor='e')
-		self.campo_id = ttk.Entry(self.frameid,textvariable=self.id).pack(padx=10, pady=10,side='right', anchor='w')
+		self.id_frame = Frame(self.top_frame)
+		self.id_frame.pack(side="top", fill="x")
+		self.id_label = ttk.Label(self.id_frame, text="ID:", font=("arial",10)).pack(padx=10, pady=10, side='left', anchor='e')
+		self.id_field = ttk.Entry(self.id_frame,textvariable=self.id).pack(padx=10, pady=10,side='right', anchor='w')
 		
-		self.nombre=StringVar()
-		self.framename = Frame(self.top_frame)
-		self.framename.pack(side="top", fill="x")
-		self.label_name = ttk.Label(self.framename, text="Nombre:", font=("arial",10)).pack(padx=10, pady=10, side='left', anchor='e')
-		self.campo_name = ttk.Entry(self.framename,textvariable=self.nombre).pack(padx=10, pady=10,side='right', anchor='w')
+		self.name=StringVar()
+		self.frame_name = Frame(self.top_frame)
+		self.frame_name.pack(side="top", fill="x")
+		self.label_name = ttk.Label(self.frame_name, text="Name:", font=("arial",10)).pack(padx=10, pady=10, side='left', anchor='e')
+		self.field_name = ttk.Entry(self.frame_name,textvariable=self.name).pack(padx=10, pady=10,side='right', anchor='w')
 		
 		self.password=StringVar()
-		self.framepass = Frame(self.top_frame)
-		self.framepass.pack(side="top", fill="x")
-		self.label_pass = ttk.Label(self.framepass, text="Password:", font=("arial",10)).pack(padx=10, pady=10, side='left', anchor='e')
-		self.campo_pass = ttk.Entry(self.framepass,textvariable=self.password, show='*').pack(padx=10, pady=10,side='right', anchor='w')
+		self.password_frame = Frame(self.top_frame)
+		self.password_frame.pack(side="top", fill="x")
+		self.password_label = ttk.Label(self.password_frame, text="Password:", font=("arial",10)).pack(padx=10, pady=10, side='left', anchor='e')
+		self.password_field = ttk.Entry(self.password_frame,textvariable=self.password, show='*').pack(padx=10, pady=10,side='right', anchor='w')
 		
-		self.apellido=StringVar()
-		self.frame_apellido = Frame(self.top_frame)
-		self.frame_apellido.pack(side="top", fill="x")
-		self.label_apellido = ttk.Label(self.frame_apellido, text="Apellido:", font=("arial",10)).pack(padx=10, pady=10, side='left', anchor='e')
-		self.campo_apellido = ttk.Entry(self.frame_apellido,textvariable=self.apellido).pack(padx=10, pady=10,side='right', anchor='w')
+		self.surname=StringVar()
+		self.surname_frame = Frame(self.top_frame)
+		self.surname_frame.pack(side="top", fill="x")
+		self.surname_label = ttk.Label(self.surname_frame, text="Surname:", font=("arial",10)).pack(padx=10, pady=10, side='left', anchor='e')
+		self.surname_field = ttk.Entry(self.surname_frame,textvariable=self.surname).pack(padx=10, pady=10,side='right', anchor='w')
 		
-		self.direccion=StringVar()
-		self.frame_direccion = Frame(self.top_frame)
-		self.frame_direccion.pack(side="top", fill="x")
-		self.label_direccion = ttk.Label(self.frame_direccion, text="Dirección:", font=("arial",10)).pack(padx=10, pady=10, side='left', anchor='e')
-		self.campo_direccion = ttk.Entry(self.frame_direccion,textvariable=self.direccion).pack(padx=10, pady=10,side='right', anchor='w')
+		self.address=StringVar()
+		self.address_frame = Frame(self.top_frame)
+		self.address_frame.pack(side="top", fill="x")
+		self.address_label = ttk.Label(self.address_frame, text="Address:", font=("arial",10)).pack(padx=10, pady=10, side='left', anchor='e')
+		self.address_field = ttk.Entry(self.address_frame,textvariable=self.address).pack(padx=10, pady=10,side='right', anchor='w')
 
-		self.frame_comentarios = Frame(self.top_frame)
-		self.frame_comentarios.pack(side="top", fill="x")
-		self.label_comentarios = ttk.Label(self.frame_comentarios, text="Comentarios:", font=("arial",10)).pack(pady=10, side='left', anchor='e')
-		self.text_box = Text(self.frame_comentarios, height=3, width=15)
-		self.scroll=Scrollbar(self.frame_comentarios, command=self.text_box.yview)
+		self.comments_frame = Frame(self.top_frame)
+		self.comments_frame.pack(side="top", fill="x")
+		self.comments_label = ttk.Label(self.comments_frame, text="Comments:", font=("arial",10)).pack(pady=10, side='left', anchor='e')
+		self.text_box = Text(self.comments_frame, height=3, width=15)
+		self.scroll=Scrollbar(self.comments_frame, command=self.text_box.yview)
 		self.scroll.pack(side='right',fill = Y )
 		self.text_box.pack(side="right", anchor='w', fill='both')
 		self.text_box.config(yscrollcommand=self.scroll.set)
 		
-		#Botones
+		# Buttons
 
-		self.boton1=ttk.Button(self.bottom_left, text="Create", width=10, command=self.create)
-		self.boton1.pack(padx=5, pady=5, side='left')
-		self.boton2=ttk.Button(self.bottom_left, text="Read", width=10, command=self.read)
-		self.boton2.pack(padx=5, pady=5, side='right')
-		self.boton3=ttk.Button(self.bottom_right, text="Update", width=10, command=self.update)
-		self.boton3.pack(padx=5, pady=5, side='left')
-		self.boton4=ttk.Button(self.bottom_right, text="Delete", width=10, command=self.delete)
-		self.boton4.pack(padx=5, pady=5, side='right')
+		self.button1=ttk.Button(self.bottom_left, text="Create", width=10, command=self.create)
+		self.button1.pack(padx=5, pady=5, side='left')
+		self.button2=ttk.Button(self.bottom_left, text="Read", width=10, command=self.read)
+		self.button2.pack(padx=5, pady=5, side='right')
+		self.button3=ttk.Button(self.bottom_right, text="Update", width=10, command=self.update)
+		self.button3.pack(padx=5, pady=5, side='left')
+		self.button4=ttk.Button(self.bottom_right, text="Delete", width=10, command=self.delete)
+		self.button4.pack(padx=5, pady=5, side='right')
 		
-		# BARRA MENÚ
+		# Menú bar
 
-		self.Menu=Menu(parent)
+		self.menu=Menu(parent)
 		
-		self.bbddMenu=Menu(self.Menu, tearoff=0)
-		self.bbddMenu.add_command(label="Conectarse", command=self.conn_bbdd)
-		self.bbddMenu.add_command(label="Salir", command=salirAplicacion)
+		self.bbdd_menu=Menu(self.menu, tearoff=0)
+		self.bbdd_menu.add_command(label="Connect", command=self.bbdd_conn)
+		self.bbdd_menu.add_command(label="Exit", command=exit_app)
 		
-		self.borrarCampos=Menu(self.Menu, tearoff=0)
-		self.borrarCampos.add_command(label="Borrar", command=self.borrado_campos)
+		self.erase_fields=Menu(self.menu, tearoff=0)
+		self.erase_fields.add_command(label="Clean", command=self.fields_erase)
 		
-		self.crudMenu=Menu(self.Menu, tearoff=0)
-		self.crudMenu.add_command(label="Crear", command=self.create)
-		self.crudMenu.add_command(label="Leer", command=self.read)
-		self.crudMenu.add_command(label="Actualizar", command=self.update)
-		self.crudMenu.add_command(label="Eliminar", command=self.delete)
+		self.crudMenu=Menu(self.menu, tearoff=0)
+		self.crudMenu.add_command(label="Create", command=self.create)
+		self.crudMenu.add_command(label="Read", command=self.read)
+		self.crudMenu.add_command(label="Update", command=self.update)
+		self.crudMenu.add_command(label="Delete", command=self.delete)
 		
-		self.archivoAyuda=Menu(self.Menu, tearoff=0)
-		self.archivoAyuda.add_command(label="Licencia", command=avisoLicencia)
-		self.archivoAyuda.add_command(label="Acerca de", command=infoAdicional)
+		self.help=Menu(self.menu, tearoff=0)
+		self.help.add_command(label="License", command=license_warning)
+		self.help.add_command(label="About", command=additional_info)
 		
-		self.Menu.add_cascade(label="BBDD", menu=self.bbddMenu)
-		self.Menu.add_cascade(label="Borrar", menu=self.borrarCampos)
-		self.Menu.add_cascade(label="CRUD", menu=self.crudMenu)
-		self.Menu.add_cascade(label="Ayuda", menu=self.archivoAyuda)
+		self.menu.add_cascade(label="BBDD", menu=self.bbdd_menu)
+		self.menu.add_cascade(label="Clean", menu=self.erase_fields)
+		self.menu.add_cascade(label="CRUD", menu=self.crudMenu)
+		self.menu.add_cascade(label="Help", menu=self.help)
 
-	def conn_bbdd(self):
+	def bbdd_conn(self):
 		global conn, cursor
 
 		if not os.path.exists(self.database):
 			conn = sqlite3.connect(self.database)
 			cursor = conn.cursor()
-			cursor.execute('''CREATE TABLE DATOS_USUARIOS 
+			cursor.execute('''CREATE TABLE USERS_DATA 
 				(ID INTEGER PRIMARY KEY AUTOINCREMENT,
-				NOMBRE_USUARIO VARCHAR(50) UNIQUE NOT NULL CHECK (LENGTH(NOMBRE_USUARIO)>1),
-				PASSWORD VARCHAR(50) NOT NULL CHECK (LENGTH(NOMBRE_USUARIO)>1),
-				APELLIDO VARCHAR(10) NOT NULL CHECK (LENGTH(NOMBRE_USUARIO)>1),
-				DIRECCION VARCHAR(50) NOT NULL CHECK (LENGTH(NOMBRE_USUARIO)>1),
-				COMENTARIOS VARCHAR(100) NOT NULL)''')
+				USERNAME VARCHAR(50) UNIQUE NOT NULL CHECK (LENGTH(USERNAME)>1),
+				PASSWORD VARCHAR(50) NOT NULL CHECK (LENGTH(PASSWORD)>1),
+				SURNAME VARCHAR(10) NOT NULL CHECK (LENGTH(SURNAME)>1),
+				ADDRESS VARCHAR(50) NOT NULL CHECK (LENGTH(ADDRESS)>1),
+				COMMENTS VARCHAR(100) NOT NULL)''')
 		else:
 			conn = sqlite3.connect(self.database)
 			cursor = conn.cursor()
 
-	def borrado_campos(self):
+	def fields_erase(self):
 		self.id.set(0)
-		self.nombre.set('')
+		self.name.set('')
 		self.password.set('')
-		self.apellido.set('')
-		self.direccion.set('')
+		self.surname.set('')
+		self.address.set('')
 		self.text_box.delete('1.0',"end")
 
-	def encriptar(self):
+	def encrypt(self):
 		return cryptocode.encrypt(self.password.get(),self.key)
 
-	def desencriptar(self,password):
+	def decrypt(self,password):
 		return cryptocode.decrypt(password, self.key)
 	
 	def create(self):
 		try:
-			password = self.encriptar()
-			cursor.execute(f'INSERT INTO DATOS_USUARIOS VALUES (NULL,"{self.nombre.get()}","{password}","{self.apellido.get()}","{self.direccion.get()}","{self.text_box.get(1.0, "end-1c")}")')
+			password = self.encrypt()
+			cursor.execute(f'INSERT INTO USERS_DATA VALUES (NULL,"{self.name.get()}","{password}","{self.surname.get()}","{self.address.get()}","{self.text_box.get(1.0, "end-1c")}")')
 			conn.commit()
-			self.borrado_campos()
-			okcheck()
+			self.fields_erase()
+			ok_check()
 		except NameError:
-				error_conn()
+				conn_error()
 		except:
-			mensaje_error()
+			error_msg()
 
 	def read(self):
 		try:
 			id = self.id.get()
-			cursor.execute(f'SELECT * FROM DATOS_USUARIOS WHERE ID={id}')
-			persona = cursor.fetchone()
-			if persona == None:
-				messagebox.showwarning("Error", "El id ingresado no le pertenece a ningún usuario en la base de datos.")
+			cursor.execute(f'SELECT * FROM USERS_DATA WHERE ID={id}')
+			person = cursor.fetchone()
+			if person == None:
+				messagebox.showwarning("Error", "The entered id does not belong to any database user.")
 			else:
-				self.nombre.set(persona[1])
-				password = self.desencriptar(str(persona[2]))
+				self.name.set(person[1])
+				password = self.decrypt(str(person[2]))
 				self.password.set(password)
-				self.apellido.set(persona[3])
-				self.direccion.set(persona[4])
+				self.surname.set(person[3])
+				self.address.set(person[4])
 				self.text_box.delete('1.0',"end")
-				self.text_box.insert('1.0', persona[5])
+				self.text_box.insert('1.0', person[5])
 		except NameError:
-			error_conn()
+			conn_error()
 
 	def update(self):
 		try:
 			id = self.id.get()
-			cursor.execute(f'SELECT * FROM DATOS_USUARIOS WHERE ID={id}')
-			persona = cursor.fetchone()
-			if persona == None:
-				messagebox.showwarning("Error", "El id ingresado no le pertenece a ningún usuario en la base de datos.")
+			cursor.execute(f'SELECT * FROM USERS_DATA WHERE ID={id}')
+			person = cursor.fetchone()
+			if person == None:
+				messagebox.showwarning("Error", "The entered id does not belong to any database user.")
 			else:
-				password = self.encriptar()
-				cursor.execute(f'UPDATE DATOS_USUARIOS SET NOMBRE_USUARIO="{self.nombre.get()}", PASSWORD="{password}", APELLIDO="{self.apellido.get()}",DIRECCION="{self.direccion.get()}",COMENTARIOS={self.text_box.get(1.0, "end-1c")} WHERE ID={self.id.get()}')
+				password = self.encrypt()
+				cursor.execute(f'UPDATE USERS_DATA SET USERNAME="{self.name.get()}", PASSWORD="{password}", SURNAME="{self.surname.get()}",ADDRESS="{self.address.get()}",COMMENTS="{self.text_box.get(1.0, "end-1c")}" WHERE ID={id}')
 				conn.commit()
-				self.borrado_campos()
-				okcheck()
+				self.fields_erase()
+				ok_check()
 		except NameError:
-			error_conn()
-
+			conn_error()
 
 	def delete(self):
 		try:
 			id = self.id.get()
-			cursor.execute(f'SELECT * FROM DATOS_USUARIOS WHERE ID={id}')
-			persona = cursor.fetchone()
-			if persona == None:
-				messagebox.showwarning("Error", "El id ingresado no le pertenece a ningún usuario en la base de datos.")
+			cursor.execute(f'SELECT * FROM USERS_DATA WHERE ID={id}')
+			person = cursor.fetchone()
+			if person == None:
+				messagebox.showwarning("Error", "The entered id does not belong to any database user.")
 			else:
-				valor=messagebox.askquestion("Eliminar", f"¿Está seguro de que desea eliminar a {persona[1]}?")
+				valor=messagebox.askquestion("Delete", f"¿Are you sure you want to delete {person[1]}?")
 				if valor=="yes":
-					cursor.execute(f'DELETE FROM DATOS_USUARIOS WHERE ID={id}')
+					cursor.execute(f'DELETE FROM USERS_DATA WHERE ID={id}')
 					conn.commit()
-					self.borrado_campos()
-					okcheck()
+					self.fields_erase()
+					ok_check()
 		except NameError:
-			error_conn()
+			conn_error()
 		except:
-			mensaje_error()
+			error_msg()
 
-def darkstyle(root):
-   
+def dark_theme(root):
     style = ttk.Style(root)
     root.tk.call('source', 'azure dark/azure dark.tcl')
     style.theme_use('azure')
@@ -215,23 +218,23 @@ def darkstyle(root):
     style.configure("Togglettk.Button", foreground='white')
     return style
 
-def infoAdicional():
-	messagebox.showinfo("Procesador de Juan", "Procesador de textos versión 2018")
+def additional_info():
+	messagebox.showinfo("Example info", "Just to complete a bit the program")
 
-def okcheck():
-	messagebox.showinfo("Todo correcto", "Todo salió como se esperaba!")	
+def ok_check():
+	messagebox.showinfo("Everything correct", "Everything went correct!")	
 
-def avisoLicencia():
-	messagebox.showwarning("Licencia", "Producto bajo licencia GNU")
+def license_warning():
+	messagebox.showwarning("License", "Product under x license...")
 
-def error_conn():
-	messagebox.showwarning("Error", "No puedes realizar una operación sin antes conectarte a la base de datos")
+def conn_error():
+	messagebox.showwarning("Error", "You cannot perform an operation without first connecting to the database")
 
-def mensaje_error():
-	messagebox.showwarning("Error", "El usuario no fue cargado por algún dato inválido, por favor corrijalo inténtelo nuevamente")
+def error_msg():
+	messagebox.showwarning("Error", "The user was not created due to some invalid data, please correct it and try again")
 
-def salirAplicacion():
-	valor=messagebox.askquestion("Salir", "¿Desea salir de la aplicación?")
+def exit_app():
+	valor=messagebox.askquestion("Exit", "¿Do you want to exit the app?")
 	if valor=="yes":
 		try:
 			cursor.close()
@@ -246,12 +249,12 @@ def main():
 
 	root = Tk()
 	myapp = MyApp(root)
-	root.config(width=440, height=530, padx=5, pady=5,menu=myapp.Menu)
-	root.title("Sistema de gestión de BBDD")
+	root.config(width=440, height=530, padx=5, pady=5,menu=myapp.menu)
+	root.title("BBDD manager")
 	root.iconbitmap("icon.ico")
 	root.resizable(0,0)
-	img = PhotoImage(file="Fondo.png")
-	style = darkstyle(root)
+	img = PhotoImage(file="bg.png")
+	style = dark_theme(root)
 	root.mainloop()
 
 if __name__ =='__main__':
